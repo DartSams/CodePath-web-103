@@ -1,29 +1,26 @@
 import express from 'express'
-import giftsRouter from './routes/gifts.js'
 import cors from 'cors'
+import tripRoutes from './routes/trips.js'
+import activityRoutes from './routes/activities.js'
+import destinationRoutes from './routes/destinations.js'
+import tripDestinationRoutes from './routes/trips_destinations.js'
 
 const app = express()
 
-// Middleware
-/** Static Routest */
-// app.use('/public', express.static('./public'))
-// app.use('/scripts', express.static('./public/scripts'))
-app.use(cors())
 app.use(express.json())
-app.use('/gifts', giftsRouter)
-// app.use(cors({
-//   origin: 'http://localhost' 
-// }))
+app.use(cors())
 
-
-// Routes
 app.get('/', (req, res) => {
-  res.status(200).send('<h1 style="text-align: center; margin-top: 50px;">UnEarthed API</h1>')
+  res.status(200).send('<h1 style="text-align: center; margin-top: 50px;">✈️ On the Fly API</h1>')
 })
+
+app.use('/trips', tripRoutes)
+app.use('/activities', activityRoutes)
+app.use('/destinations', destinationRoutes)
+app.use('/trips-destinations', tripDestinationRoutes)
 
 const PORT = process.env.PORT || 3001
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server listening on http://localhost:${PORT}`)
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
 })
-
